@@ -4,8 +4,13 @@
  
 <h1>Mi primera WEB</h1>
 
-<?php
-echo "My first PHP script!";
+<?php // Inicio de código PHP
+
+// echo sirve para mostrar información en pantalla.
+echo "My first PHP script!"; // Las cadenas de texto van estre comillas.
+//todas las sentencias de PHP deben terminar en punto y coma.
+
+// Fin de código PHP
 ?>
 
 </body>
