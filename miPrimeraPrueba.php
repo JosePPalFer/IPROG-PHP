@@ -40,6 +40,21 @@ echo "<br>Aquí acaba el ejemplo"; //Imprime un salto de línea en HTML
 $cars = array("Volvo","BMW","Toyota");//Array guarda multiples variables en una variable
 var_dump($cars);
 echo "Mi coche es un:". $cars[2];
+
+$edadAlumno = 16;
+$edadPadre = 45;
+
+if ($edadAlumno > 18) {
+echo "Puede salir al recreo en el primer timbre";
+} else {
+    echo "No puede salir al recreo, hay que llamas al padre";
+}
+
+if ($edadAlumno >= 18 && $edadAlumno<35) {
+echo "Puede solicitar beca";
+} else {
+    echo "No puede solicitar beca, porque es menor de edad o mayor o igual a 35 años";
+}
 ?>
 </body>
 </html>
