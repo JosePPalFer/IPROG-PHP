@@ -8,13 +8,13 @@ $numero2 = readline("Por favor, ingresa un número: ");
 $numero3 = readline("Por favor, ingresa un número: ");
 
 if ($numero > 100 || $numero2 > 100 || $numero3 > 100) {
-    echo "Al menos uno de los es mayor que 100";
+    echo "Al menos uno de los números es mayor que 100";
 } else {
     echo "Ningún número es mayor que 100";
 }
 
 echo "<br><br><br>5.- Escribe un programa que pida un número y usando un bucle while, imprima todos los números desde ese número hasta cero, pero solo si el número es positivo.<br><br>";
-$numero = readline("Por favor, ingresa un número positivo: ");
+$numero = 5;
 if ($numero >= 0) {
     while ($numero >= 0) {
         echo $numero. " ";
@@ -25,19 +25,13 @@ if ($numero >= 0) {
 }
 
 echo "<br><br><br>6.- Escribe un programa que calcule un número al azar, y luego pida un número al usuario repetidamente, hasta que el usuario acierte.<br><br>";
-//$numeroSecreto = rand(1, 100);
-//$intentos = 0;
-//do {
-    //$numeroUsuario = (int)readline("Adivina el número entre 1 y 100: ");
-    //$intentos++;
-    //if ($numeroUsuario < $numeroSecreto) {
-    //    echo "Demasiado bajo. Inténtalo de nuevo.\n";
-    //} elseif ($numeroUsuario > $numeroSecreto) {
-    //    echo "Demasiado alto. Inténtalo de nuevo.\n";
-    //} else {
-    //    echo "¡Enhorabuena! Has acertado el número $numeroSecreto en $intentos intentos.\n"; //Cuando acierte muestrale un mensaje por pantalla de enhorabuena e indicale el número de intentos que ha necesitado.
-    //}
-//} while ($numeroUsuario != $numeroSecreto);
+$numeroSecreto = rand(1, 100);
+$intentos = 0;
+do {
+    $numeroUsuario = rand(1,100);
+    $intentos++;
+} while ($numeroUsuario != $numeroSecreto);
+echo "¡Enhorabuena! Has acertado el número $numeroSecreto en $intentos intentos.\n"; //Cuando acierte muestrale un mensaje por pantalla de enhorabuena e indicale el número de intentos que ha necesitado.
 
 echo "<br><br><br>7.- Crea un programa que pida un número y verifique si es un número primo o no. Usa bucles y condicionales.<br><br>";
 $numero = readline("Por favor, ingresa un número para verificar si es primo: ");
