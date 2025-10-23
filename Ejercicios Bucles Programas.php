@@ -3,9 +3,9 @@
 <body>
 <?php
 echo "<br><br><br>4.- Haz un programa que pida tres números y determine si al menos uno de ellos es mayor que 100, usando operadores lógicos y condicionales.<br><br>";
-$numero = (int)readline("Por favor, ingresa un número: "); //$numero = readline("Por favor, ingresa un número: ");
-$numero2 = (int)readline("Por favor, ingresa un número: ");
-$numero3 = (int)readline("Por favor, ingresa un número: ");
+$numero = readline("Por favor, ingresa un número: "); //$numero = readline("Por favor, ingresa un número: ");
+$numero2 = readline("Por favor, ingresa un número: ");
+$numero3 = readline("Por favor, ingresa un número: ");
 
 if ($numero > 100 || $numero2 > 100 || $numero3 > 100) {
     echo "Al menos uno de los es mayor que 100";
@@ -14,7 +14,7 @@ if ($numero > 100 || $numero2 > 100 || $numero3 > 100) {
 }
 
 echo "<br><br><br>5.- Escribe un programa que pida un número y usando un bucle while, imprima todos los números desde ese número hasta cero, pero solo si el número es positivo.<br><br>";
-$numero = (int)readline("Por favor, ingresa un número positivo: ");
+$numero = readline("Por favor, ingresa un número positivo: ");
 if ($numero >= 0) {
     while ($numero >= 0) {
         echo $numero. " ";
@@ -40,7 +40,7 @@ echo "<br><br><br>6.- Escribe un programa que calcule un número al azar, y lueg
 //} while ($numeroUsuario != $numeroSecreto);
 
 echo "<br><br><br>7.- Crea un programa que pida un número y verifique si es un número primo o no. Usa bucles y condicionales.<br><br>";
-$numero = (int)readline("Por favor, ingresa un número para verificar si es primo: ");
+$numero = readline("Por favor, ingresa un número para verificar si es primo: ");
 if ($numero <= 1) {
     echo "$numero no es un número primo.";
 } else {
@@ -59,10 +59,10 @@ if ($numero <= 1) {
 }
 
 echo "<br><br><br>8.- Calculadora. Menu: pulsa 0 para salir, 1 para sumar, 2 para restar, 3 multiplica y 4 dividir.<br><br>";
-$opcion = (int)readline("Selecciona una opción (0: salir, 1: sumar, 2: restar, 3: multiplicar, 4: dividir): "); //Si pulsa 1, 2, 3, o 4, debe pedirle al usuario los números
+$opcion = readline("Selecciona una opción (0: salir, 1: sumar, 2: restar, 3: multiplicar, 4: dividir): "); //Si pulsa 1, 2, 3, o 4, debe pedirle al usuario los números
 if ($opcion >= 1 && $opcion <= 4) { //y mostrarle el resultado de la operación seleccionada.
-    $num1 = (float)readline("Ingresa el primer número: ");
-    $num2 = (float)readline("Ingresa el segundo número: ");
+    $num1 = readline("Ingresa el primer número: ");
+    $num2 = readline("Ingresa el segundo número: ");
     switch ($opcion) {
         case 1:
             $resultado = $num1 + $num2;

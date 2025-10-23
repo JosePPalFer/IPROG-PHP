@@ -38,11 +38,11 @@ $a = 0; //$a tomará los valores: 0 si no llueve y 1 si sí llueve.
 $b = 0; //$b tomara los valores: 0 si no hace viento y 1 si hace viento.
 $c = 38; //$c tomará los valores posibles de temperatura en ºC.
 
-if ($a == 1 && $b == 0) { //Si llueve y no hace viento, "Se necesita paraguas".
+if ($a == 0 && $b == 0 && $c > 37) { //Si la temperatura es mayor a 37ºC y no llueve, ni hace viento, deberán tambien sacar un paraguas.
     echo "Se necesita paraguas";
 } elseif ($a == 1 && $b == 1) { //Si llueve y sí hace viento, "No se necesita paraguas".
     echo "No se necesita paraguas";
-} elseif ($a == 0 && $b == 0 && $c > 37)  { //Si la temperatura es mayor a 37ºC y no llueve, ni hace viento, deberán tambien sacar un paraguas.
+} elseif ($a == 1 && $b == 0)  { //Si llueve y no hace viento, "Se necesita paraguas".
     echo "Se necesita paraguas";
 } else { //En cualquier otro caso "No se necesita paraguas"
     echo "No se necesita paraguas";
