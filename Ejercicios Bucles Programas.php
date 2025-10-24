@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
 <?php
 echo "<br><br><br>4.- Haz un programa que pida tres números y determine si al menos uno de ellos es mayor que 100, usando operadores lógicos y condicionales.<br><br>";
@@ -53,36 +58,51 @@ if ($numero <= 1) {
 }
 
 echo "<br><br><br>8.- Calculadora. Menu: pulsa 0 para salir, 1 para sumar, 2 para restar, 3 multiplica y 4 dividir.<br><br>";
-$opcion = readline("Selecciona una opción (0: salir, 1: sumar, 2: restar, 3: multiplicar, 4: dividir): "); //Si pulsa 1, 2, 3, o 4, debe pedirle al usuario los números
-if ($opcion >= 1 && $opcion <= 4) { //y mostrarle el resultado de la operación seleccionada.
+do {
+    echo "<br>===== CALCULADORA =====<br>";
+    echo "0 - Salir<br>";
+    echo "1 - Sumar<br>";
+    echo "2 - Restar<br>";
+    echo "3 - Multiplicar<br>";
+    echo "4 - Dividir<br>";
+    echo "5 - Modulo<br>";
+     $opcion = readline("Elije una opcion: "); //Si pulsa 1, 2, 3, o 4, debe pedirle al usuario los números
+
+if ($opcion >= 1 && $opcion <= 5) { //y mostrarle el resultado de la operación seleccionada.
     $num1 = readline("Ingresa el primer número: ");
     $num2 = readline("Ingresa el segundo número: ");
-    switch ($opcion) {
-        case 1:
-            $resultado = $num1 + $num2;
-            echo "El resultado de la suma es: $resultado";
-            break;
-        case 2:
-            $resultado = $num1 - $num2;
-            echo "El resultado de la resta es: $resultado";
-            break;
-        case 3:
-            $resultado = $num1 * $num2;
-            echo "El resultado de la multiplicación es: $resultado";
-            break;
-        case 4:
-            if ($num2 != 0) {
-                $resultado = $num1 / $num2;
-                echo "El resultado de la división es: $resultado";
-            } else {
-                echo "Error: No se puede dividir por cero.";
-            }
-            break;
-    }
-} else {
-    echo "Saliendo de la calculadora.";
-}
+    $resultado = 0;
 
+    if ($opcion == 1) {
+            $resultado = $num1 + $num2;
+            echo "El resultado de la suma es: $resultado<br>";
+        } elseif ($opcion == 2) {
+            $resultado = $num1 - $num2;
+            echo "El resultado de la resta es: $resultado<br>";
+        } elseif ($opcion == 3) {
+            $resultado = $num1 * $num2;
+            echo "El resultado de la multiplicacion es: $resultado<br>";
+        } elseif ($opcion == 4) {
+            if ($num2 == 0) {
+                echo "Error: no se puede dividir por cero.<br>";
+            } else {
+                $resultado = $num1 / $num2;
+                echo "El resultado de la divicion es: $resultado<br>";
+            }
+        } elseif ($opcion == 5) {
+            if ($num2 == 0) {
+                echo "Error: no se puede calcular el modulo con divisor cero.<br>";
+            } else {
+                $resultado = $num1 % $num2;
+                echo "El modulo es: $resultado<br>";
+            }
+        }
+    } elseif ($opcion != 0) {
+        echo "Opcion no valida. Intentalo de nuevo.\n";
+    }
+} while ($opcion != 0);
+
+echo "Saliendo de la calculadora...<br>";
 
 //9.- (en clase)Escribe un programa que pida un nombre de usuario y una contraseña, y verifique si ambos cumplen con estas condiciones:
 //a) El nombre de usuario debe tener más de 5 caracteres.
