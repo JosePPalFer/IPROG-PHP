@@ -47,6 +47,9 @@ $zapatos = array("Marca" => "Nike",
 foreach ($zapatos as $x => $y) {
     echo "<br>" . $x . ": " . $y;
 }
+
+//Crear un array de producto, que tenga nombre, caracteristicas, precio, stock, etc, con diferentes campos.
+//$pera = array("Nombre" => "Pera", "Kilos" => 7,"Precio" => 13, "Cantidad" => 8)
 ?>
 </body>
 </html>
