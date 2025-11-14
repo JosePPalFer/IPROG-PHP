@@ -49,7 +49,21 @@ foreach ($zapatos as $x => $y) {
 }
 
 //Crear un array de producto, que tenga nombre, caracteristicas, precio, stock, etc, con diferentes campos.
-//$pera = array("Nombre" => "Pera", "Kilos" => 7,"Precio" => 13, "Cantidad" => 8)
+$pera = array("Nombre" => "Pera", "Kilos" => 4,"Precio" => 13, "Cantidad" => 8);
+$man = array ("Nombre" => "Manzana", "Kilos" => 5,"Precio" => 10, "Cantidad" => 5);
+$naran = array ("Nombre" => "Naranja", "Kilos" => 7,"Precio" => 12, "Cantidad" => 10);
+
+foreach ($pera as $etiqueta => $valor) {
+    echo "<br>" . $etiqueta . ": " . $valor . "<br>";
+}
+
+foreach ($man as $etiqueta => $valor) {
+    echo "<br>" . $etiqueta . ": " . $valor;
+}
+
+foreach ($naran as $etiqueta => $valor) {
+    echo "<br>" . $etiqueta . ": " . $valor;
+}
 ?>
 </body>
 </html>
