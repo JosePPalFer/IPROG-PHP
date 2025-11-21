@@ -12,22 +12,22 @@ $ofertas = [
 // Array de productos regulares
 $regulares = [
  '002' => 'Plátano',
- '003' => 'Pera Verde',
+ '003' => 'Pera Roja',
  '004' => 'Uva Negra',
 ];
 
 echo "1.a) Combinar en un único arrays todos los productos, llámalo “productos”<br><br>";
-$productos = array_merge($ofertas,$regulares);
+$productos = array_merge($ofertas, $regulares); // Se puede realizar tambien con $productos = $ofertas + $regulares;
 print_r($productos);
 
-echo "<br><br>1.b) Indica qué sucede con aquellos productos que tienen la misma clave con distinto valor.<br>";
-echo "Si varios productos tienen la misma clave, el último sobreescibe al primero.<br><br>";
+echo "<br><br>b) Indica qué sucede con aquellos productos que tienen la misma clave con distinto valor.<br><br>";
+echo "Si varios productos tienen la misma clave, el último sobreescibe al primero, pero el + ignora el último.<br><br>";
 
-echo "1.c) Partiendo del array “productos”, añade en el mismo 2 o 3 productos nuevos.<br><br>";
+echo "c) Partiendo del array “productos”, añade en el mismo 2 o 3 productos nuevos.<br><br>";
 $productos += ["006" => "Melocoton", "007" => "Sandia", "008" => "Melon"];
 print_r($productos);
 
-echo "<br><br>1.d) Utiliza la función array_diff para obtener todos los productos que no están en oferta.<br><br>";
+echo "<br><br>d) Utiliza la función array_diff para obtener todos los productos que no están en oferta.<br><br>";
 $sin_oferta = array_diff($productos, $ofertas);
 print_r($sin_oferta);
 
@@ -43,6 +43,7 @@ function ordenar_etiqueta() {
  'E103' => 'Benito Pérez',
  'E102' => 'Diana Castro',
 ];
+
 ksort ($empleados);
 
 foreach ($empleados as $etiqueta => $valor)
@@ -51,6 +52,7 @@ foreach ($empleados as $etiqueta => $valor)
     echo "<br>";
     }
 }
+
 ordenar_etiqueta();
 
 echo "<br>2. Por su valor (Nombre del empleado) de forma ascendente, usando asort.<br><br>";
@@ -97,6 +99,17 @@ foreach ($notas as $etiqueta => $valor)
     echo "Etiqueta=" . $etiqueta . ", Valor=" . $valor;
     echo "<br>";
     };
+
+$suma = 0;
+
+foreach ($notas as $etiqueta => $valor)
+    {
+    $suma += $valor;
+    };
+
+$media = $suma / count($notas);
+
+echo "<br>La media de todas las notas es: " . $media;
 ?>
 </body>
 </html>
