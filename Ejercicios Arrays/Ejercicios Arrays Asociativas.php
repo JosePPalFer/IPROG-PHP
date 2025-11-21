@@ -100,13 +100,7 @@ foreach ($notas as $etiqueta => $valor)
     echo "<br>";
     };
 
-$suma = 0;
-
-foreach ($notas as $etiqueta => $valor)
-    {
-    $suma += $valor;
-    };
-
+$suma = array_sum($notas);
 $media = $suma / count($notas);
 
 echo "<br>La media de todas las notas es: " . $media;
