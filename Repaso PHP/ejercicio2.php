@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<body>
 <?php
 
 echo "<h1>Ejercicio 2.</h1><br>";
@@ -13,3 +16,6 @@ if ($precio >= 20) {
     $precio_final = $precio;
     echo "2. Precio original: **$precio**. No se aplicó descuento. Precio final: **$precio_final**.\n";
 }
+?>
+</body>
+</html>

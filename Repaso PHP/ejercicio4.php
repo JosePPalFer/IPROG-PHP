@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<body>
 <?php
 // 4. Inicializa un contador en 0. Usa un bucle while para incrementar el contador de X en X hasta que alcance o supere el número indicado
 //. Imprime los numeros.
@@ -13,3 +16,6 @@ while ($contador <= $numero) {
     $contador += $cnt;
 }
 echo "4. El contador final es: **$contador**.<br>";
+?>
+</body>
+</html>

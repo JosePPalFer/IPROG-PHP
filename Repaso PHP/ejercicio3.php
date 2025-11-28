@@ -1,4 +1,7 @@
- <?php
+<!DOCTYPE html>
+<html>
+<body> 
+<?php
     //Ejercicio 3
     // 1. Pide un número 3 y muestra los números pares desde el 2 a ese
     echo "<h1>Ejercicio 3.</h1><br>";
@@ -12,4 +15,6 @@
         echo "$i <br>";
     }
     echo "<br>";
-    ?>
+?>
+</body>
+</html>

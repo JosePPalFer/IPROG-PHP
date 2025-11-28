@@ -1,4 +1,7 @@
- <?php
+<!DOCTYPE html>
+<html>
+<body>
+<?php
     //Ejercicio 1
     // 1. Pide un número y comprueba si es mayor de 10. Imprime un mensaje apropiado.
     echo "<h1>Ejercicio 1.</h1><br>";
@@ -13,4 +16,6 @@
     } else {
         echo "1. El número **$numero** no es mayor de 10.\n";
     }
-    ?>
+?>
+</body>
+</html>
