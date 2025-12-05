@@ -83,22 +83,22 @@ $PersonasF = array(
 //Media Baloncesto
 $mediaB = 0;
 foreach ($PersonasB as $nombre => $edad) {
-$mediaB = $mediaB + $edad;
-}
+$mediaB = $mediaB + $edad;}
+
 $mediaB = $mediaB / count($PersonasB);
 
 // Media Padel
 $mediaP = 0;
 foreach ($PersonasP as $nombre => $edad) {
-$mediaP = $mediaP + $edad;
-}
+$mediaP = $mediaP + $edad;}
+
 $mediaP = $mediaP / count($PersonasP);
 
 //Media Futbol
 $mediaF = 0;
 foreach ($PersonasF as $nombre => $edad) {
-$mediaF = $mediaF + $edad;
-}
+$mediaF = $mediaF + $edad;}
+
 $mediaF = $mediaF / count($PersonasF);
 
 echo "La media de edad en el Baloncesto es: " . $mediaB . "<br>";
@@ -127,7 +127,7 @@ $Padel["federado"] = "Madrid";
 
 echo "Padel: "; print_r($Padel); echo "<br><br>";
 
-$Futbol["federado"] = "Barcelona";    
+$Futbol["federado"] = "Barcelona";
 
 echo "Futbol: "; print_r($Futbol); echo "<br>";
 
@@ -140,7 +140,7 @@ unset($Padel["Frecuencia"]);
 
 echo "Padel: "; print_r($Padel); echo "<br><br>";
 
-unset($Futbol["Frecuencia"]); 
+unset($Futbol["Frecuencia"]);
 
 echo "Futbol: "; print_r($Futbol);
 
