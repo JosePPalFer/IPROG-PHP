@@ -7,6 +7,7 @@ require 'conexion.php';
 // Seleccionamos específicamente las columnas que pediste
 $juego = "SELECT id, Nombre, Género, id_Director, id_Distribuidora FROM videojuegos";
 $sql = "SELECT id, Nombre, Apellidos, Edad FROM directores";
+$distribuidor = "SELECT id, Nombre FROM distribuidoras";
 
 // Ejemplo con filtro en la búsqueda:
 /*$sql = "SELECT DNI, Nombre, Apellidos, Edad FROM tabla1
@@ -14,8 +15,9 @@ WHERE Nombre like 'A%'";*/
 
 
 // 3. Ejecutamos la consulta
-$result = mysqli_query($conex, $juego);
-$resultado = mysqli_query($conn, $sql); //Devuelve un objeto
+$result = mysqli_query($conn, $juego); //Devuelve un objeto
+$resultado = mysqli_query($conn, $sql);
+$res = mysqli_query($conn, $distribuidor);
 
 //Verificamos si la consulta se ejecutó correctamente
 //Si ha habido un error en la consulta (por error en tabla, columna)
@@ -70,7 +72,7 @@ else {
         <tbody>
             <?php
             if (!$result) {
-                die("Error en la consulta: " . mysqli_error($conex));
+                die("Error en la consulta: " . mysqli_error($conn));
             } //Sino, significa que todo ha ido bien.
             // Verificamos si hay al menos una fila de resultados
             elseif(mysqli_num_rows($result) > 0) {
@@ -129,14 +131,46 @@ else {
         </tbody>
     </table>
 
+        <h1>Listado de Datos de Distribuidoras</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (!$res) {
+                die("Error en la consulta: " . mysqli_error($conn));
+            } //Sino, significa que todo ha ido bien.
+            // Verificamos si hay al menos una fila de resultados
+            elseif(mysqli_num_rows($res) > 0) {
+                // 6. Recorremos cada fila de datos
+                // mysqli_fetch_assoc convierte cada fila en un array asociativo
+                while($fila = mysqli_fetch_assoc($res)) {
+                    echo "<tr>";
+                    echo "<td>" . $fila['id'] . "</td>";
+                    echo "<td>" . $fila['Nombre'] . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                // Si no hay datos, mostramos una fila avisando
+                echo "<tr><td colspan='4'>No hay registros encontrados.</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+
     <?php
     // 7. Liberar memoria del resultado (opcional en scripts pequeños, pero buena práctica)
     mysqli_free_result($resultado);
     mysqli_free_result($result);
-    
+    mysqli_free_result($res);
+
     // 8. Cerrar la conexión
     mysqli_close($conn);
-    mysqli_close($conex);
     ?>
 
 </body>
