@@ -57,7 +57,7 @@ else {
 </head>
 <body>
 
-    <h1>Listado de Datos de Viedojuegos</h1>
+    <h1>Listado de Datos de Videojuegos</h1>
 
     <table>
         <thead>
