@@ -5,173 +5,106 @@ require 'conexion.php';
 
 // 2. Preparamos la consulta SQL
 // Seleccionamos específicamente las columnas que pediste
-$juego = "SELECT id, Nombre, Género, id_Director, id_Distribuidora FROM videojuegos";
-$sql = "SELECT id, Nombre, Apellidos, Edad FROM directores";
-$distribuidor = "SELECT id, Nombre FROM distribuidoras";
+$sql = "SELECT DNI, nombre, apellidos, edad FROM tabla1";
 
 // Ejemplo con filtro en la búsqueda:
-/*$sql = "SELECT DNI, Nombre, Apellidos, Edad FROM tabla1
-WHERE Nombre like 'A%'";*/
-
+/*$sql = "SELECT DNI, nombre, apellidos, edad FROM tabla1
+WHERE nombre like 'A%'";*/
 
 // 3. Ejecutamos la consulta
-$result = mysqli_query($conn, $juego); //Devuelve un objeto
-$resultado = mysqli_query($conn, $sql);
-$res = mysqli_query($conn, $distribuidor);
+$resultado = mysqli_query($conn, $sql); //Devuelve un objeto
 
 //Verificamos si la consulta se ejecutó correctamente
-//Si ha habido un error en la consulta (por error en tabla, columna)
-//Devuelve false (!false es lo mismo que true), entra en el if.
+// Si ha habido un error en la consulta (por error en tabla, columna)
+// Devuelve false (!false  es lo mismo que true), entra en el if
 /*if (!$resultado) {
     die("Error en la consulta: " . mysqli_error($conn));
-}//Sino, significa que todo ha ido bien.
+} //Sino, significa que todo ha ido bien.
 else {
     //Si el número de filas del objeto resultado es mayor a 0,
     //es porque la consulta de la variable $sql ha sido exitosa.
-    //En ese caso tendrá al menos una fila.
+    // En ese caso tendrá al menos una fila.
     if(mysqli_num_rows($resultado) > 0){
-        while($fila = mysqli_fetch_assoc($resultado)){ //sigue mostrando valores del objeto hasta que devuelva Nulo
-            echo "El nombre de la alumn@ es: ".$fila["Nombre"]."<br>";
-            echo "Apellidos: ".$fila["Apellidos"]."<br>";
+        while($fila = mysqli_fetch_assoc($resultado)){
+            echo "El nombre de la alumn@ es: ".$fila["nombre"]."<br>";
+            echo "Apellidos: ".$fila["apellidos"]."<br>";
             echo "DNI: ".$fila["DNI"]."<br>";
             echo "Edad: ".$fila["edad"]."<br>";
         }
     }
 }*/
-
-//var_dump($fila);
-
 ?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Personas</title>
-    <style>
-        /* Un poco de estilo básico para la tabla */
-        table { border-collapse: collapse; width: 80%; margin: 20px auto; font-family: Arial, sans-serif; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        h1 { text-align: center; }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-    <h1>Listado de Datos de Videojuegos</h1>
+    <div class="container mt-5">
+        
+        <h1 class="text-center mb-4 text-primary">Listado de Datos de Tabla1</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Nombre</th>
-                <th>Género</th>
-                <th>id_Director</th>
-                <th>id_Distribuidora</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if (!$result) {
-                die("Error en la consulta: " . mysqli_error($conn));
-            } //Sino, significa que todo ha ido bien.
-            // Verificamos si hay al menos una fila de resultados
-            elseif(mysqli_num_rows($result) > 0) {
-                // 6. Recorremos cada fila de datos
-                // mysqli_fetch_assoc convierte cada fila en un array asociativo
-                while($fila = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>" . $fila['id'] . "</td>";
-                    echo "<td>" . $fila['Nombre'] . "</td>";
-                    echo "<td>" . $fila['Género'] . "</td>";
-                    echo "<td>" . $fila['id_Director'] . "</td>";
-                    echo "<td>" . $fila['id_Distribuidora'] . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                // Si no hay datos, mostramos una fila avisando
-                echo "<tr><td colspan='4'>No hay registros encontrados.</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Edad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Verificación de error
+                            if (!$resultado) {
+                                // Si falla, cerramos la tabla y mostramos una alerta roja de Bootstrap
+                                echo '</tbody></table></div></div></div>';
+                                echo '<div class="alert alert-danger mt-3" role="alert">';
+                                echo 'Error en la consulta: ' . mysqli_error($conn);
+                                echo '</div>';
+                                die(); // Detenemos el script
+                            } 
+                            
+                            // Si todo va bien y hay filas
+                            elseif (mysqli_num_rows($resultado) > 0) {
+                                while($fila = mysqli_fetch_assoc($resultado)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $fila['DNI'] . "</td>";
+                                    echo "<td>" . $fila['nombre'] . "</td>";
+                                    echo "<td>" . $fila['apellidos'] . "</td>";
+                                    // Badge para la edad (opcional, visualmente agradable)
+                                    echo "<td>". $fila['edad'] . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                // Si no hay datos, mostramos mensaje centrado
+                                echo "<tr><td colspan='4' class='text-center text-muted p-4'>No hay registros encontrados.</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div> </div>
+        </div>
 
-    <h1>Listado de Datos de Directores</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Edad</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if (!$resultado) {
-                die("Error en la consulta: " . mysqli_error($conn));
-            } //Sino, significa que todo ha ido bien.
-            // Verificamos si hay al menos una fila de resultados
-            elseif(mysqli_num_rows($resultado) > 0) {
-                // 6. Recorremos cada fila de datos
-                // mysqli_fetch_assoc convierte cada fila en un array asociativo
-                while($fila = mysqli_fetch_assoc($resultado)) {
-                    echo "<tr>";
-                    echo "<td>" . $fila['id'] . "</td>";
-                    echo "<td>" . $fila['Nombre'] . "</td>";
-                    echo "<td>" . $fila['Apellidos'] . "</td>";
-                    echo "<td>" . $fila['Edad'] . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                // Si no hay datos, mostramos una fila avisando
-                echo "<tr><td colspan='4'>No hay registros encontrados.</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-
-        <h1>Listado de Datos de Distribuidoras</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Nombre</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if (!$res) {
-                die("Error en la consulta: " . mysqli_error($conn));
-            } //Sino, significa que todo ha ido bien.
-            // Verificamos si hay al menos una fila de resultados
-            elseif(mysqli_num_rows($res) > 0) {
-                // 6. Recorremos cada fila de datos
-                // mysqli_fetch_assoc convierte cada fila en un array asociativo
-                while($fila = mysqli_fetch_assoc($res)) {
-                    echo "<tr>";
-                    echo "<td>" . $fila['id'] . "</td>";
-                    echo "<td>" . $fila['Nombre'] . "</td>";
-                    echo "</tr>";
-                }
-            } else {
-                // Si no hay datos, mostramos una fila avisando
-                echo "<tr><td colspan='4'>No hay registros encontrados.</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-
-    <?php
+    </div> 
+     <?php
     // 7. Liberar memoria del resultado (opcional en scripts pequeños, pero buena práctica)
     mysqli_free_result($resultado);
-    mysqli_free_result($result);
-    mysqli_free_result($res);
 
     // 8. Cerrar la conexión
     mysqli_close($conn);
     ?>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+   
 </body>
 </html>

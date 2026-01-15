@@ -1,63 +1,55 @@
 <?php
-session_start();
-if (isset($_SESSION['rol'])){
-        if($_SESSION['rol'] == 1){
+//Incluyo la conclusión como siempre
+require 'conexion.php';
 
-    //Incluyo la conclusión como siempre
-    require 'conexion.php';
+$mensaje = "";
 
+// --- LÓGICA DE ACTUALIZACIÓN ---
 
+// Compruebo dos cosas: 
+//  1.- Que se haya envíado el formulario de "modificar.php" con POST
+//  2.- Que se haya pulsado el boton de actualizar, porque sino, no actualizo.
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_actualizar'])) {
+    // Recogemos los datos (El DNI no se edita, se usa como referencia)
+    $id       = $_POST['id'];
+    $nombre    = $_POST['nombre'];
+    $apellidos = $_POST['apellidos'];
+    $edad      = $_POST['edad'];
 
-    $mensaje = "";
+    // Creamos la cadena con la sentencia del UPDATE
+    $sql_update = "UPDATE directores SET nombre='$nombre', apellidos='$apellidos', edad=$edad 
+    WHERE ID='$id'"; // Super importante el WHERE!!!!!!!!!! siempre buscaré por clave primaría.
 
-    // --- LÓGICA DE ACTUALIZACIÓN ---
-
-    // Compruebo dos cosas: 
-    //  1.- Que se haya envíado el formulario de "modificar.php" con POST
-    //  2.- Que se haya pulsado el boton de actualizar, porque sino, no actualizo.
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_actualizar'])) {
-        // Recogemos los datos (El DNI no se edita, se usa como referencia)
-        $dni       = $_POST['dni'];
-        $nombre    = $_POST['nombre'];
-        $apellidos = $_POST['apellidos'];
-        $edad      = $_POST['edad'];
-
-        // Creamos la cadena con la sentencia del UPDATE
-        $sql_update = "UPDATE tabla1 SET nombre='$nombre', apellidos='$apellidos', edad=$edad 
-        WHERE DNI='$dni'"; // Super importante el WHERE!!!!!!!!!! siempre buscaré por clave primaría.
-
-        if (mysqli_query($conn, $sql_update)) {
-            $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            ¡Registro de '.$nombre.' actualizado correctamente!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>';
-        } else {
-            $mensaje = '<div class="alert alert-danger">Error al actualizar: ' . mysqli_error($conn) . '</div>';
-        }
-    }elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_eliminar']) ){
-
-        $dni = $_POST['dni'];
-
-        // Creamos la cadena con la sentencia del DELETE
-
-        $sql_delete = "DELETE FROM tabla1 
-        WHERE DNI='$dni'"; // Super importante el WHERE!!!!!!!!!! siempre buscaré por clave primaría.
-    
-    if (mysqli_query($conn, $sql_delete)) {
-            $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            ¡Registro de '.$dni.' eliminado con exito!
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>';
-        } else {
-            $mensaje = '<div class="alert alert-danger">Error al eliminar: ' . mysqli_error($conn) . '</div>';
-        }
+    if (mysqli_query($conn, $sql_update)) {
+        $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        ¡Registro de '.$nombre.' actualizado correctamente!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>';
+    } else {
+        $mensaje = '<div class="alert alert-danger">Error al actualizar: ' . mysqli_error($conn) . '</div>';
     }
+}elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn_eliminar']) ){
 
-    // --- CONSULTA PARA MOSTRAR LA TABLA ---
-    $sql = "SELECT DNI, nombre, apellidos, edad FROM tabla1";
-    $resultado = mysqli_query($conn, $sql);
+    $id = $_POST['id'];
+
+    // Creamos la cadena con la sentencia del DELETE
+
+    $sql_delete = "DELETE FROM tabla1 
+    WHERE ID='$id'"; // Super importante el WHERE!!!!!!!!!! siempre buscaré por clave primaría.
+   
+   if (mysqli_query($conn, $sql_delete)) {
+        $mensaje = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        ¡Registro de '.$id.' eliminado con exito!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>';
+    } else {
+        $mensaje = '<div class="alert alert-danger">Error al eliminar: ' . mysqli_error($conn) . '</div>';
+    }
 }
-}
+
+// --- CONSULTA PARA MOSTRAR LA TABLA ---
+$sql = "SELECT DNI, nombre, apellidos, edad FROM tabla1";
+$resultado = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +63,6 @@ if (isset($_SESSION['rol'])){
 <body class="bg-light">
 
     <div class="container mt-5">
-        <h2>Bienvenido <?php echo $_SESSION['nombre']?></h2>
         <h1 class="text-center mb-4 text-primary">Edición de Datos (Tabla1)</h1>
         
         <?php echo $mensaje; ?>
@@ -82,7 +73,7 @@ if (isset($_SESSION['rol'])){
                     <table class="table table-hover align-middle">
                         <thead class="table-dark">
                             <tr>
-                                <th>DNI (ID)</th>
+                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Edad</th>
@@ -99,8 +90,8 @@ if (isset($_SESSION['rol'])){
                                     <tr>
                                         <form action="modificar.php" method="POST" class="d-flex">
                                             <td>
-                                                <strong><?php echo $fila['DNI']; ?></strong>
-                                                <input type="hidden" name="dni" id="dni" value="<?php echo $fila['DNI']; ?>">
+                                                <strong><?php echo $fila['ID']; ?></strong>
+                                                <input type="hidden" name="id" id="id" value="<?php echo $fila['ID']; ?>">
                                             </td>
                                             <td>
                                                 <input type="text" name="nombre" class="form-control form-control-sm" value="<?php echo $fila['nombre']; ?>" required>
