@@ -334,7 +334,7 @@
     PHP
     <?php
     // 21. Recorre un array de contraseñas. Verifica: 1) \$leg 8$ caracteres (strlen); 2) Contiene el carácter $ (strpos). Imprime "Segura" o "Débil".
-    $contrasenas = ["P4$$word", "segura123", "P4$w", "MiC$lave"];
+    $contrasenas = ["P4$$.word", "segura123", "P4$.w", "MiC$.lave"];
 
     echo "21. Verificación de Contraseñas:\n";
 

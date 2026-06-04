@@ -22,20 +22,20 @@ foreach ($AgendaTotal as $codigo => $valor) {
 echo "<br>";
 
 echo "<b>2. Tratamiento de Cadenas y Cálculo</b><br><br>";
-$sumaaforos = 0;
+$sumaAforos = 0;
 $contador = 0;
 foreach ($AgendaTotal as $codigo => $valor) {
     if (stripos($valor, "Málaga") !==false OR stripos($valor, "Malaga") !==false) {
-        $evento=explode(", ", $valor);
-            $aforo=explode(": ", $evento[1]);
+        $evento = explode(", ", $valor);
+            $aforo = explode(": ", $evento[1]);
         
-        $sumaaforos += $aforo[1];
+        $sumaAforos += $aforo[1];
 
         $contador++;
     }
 }
 
-$aforomedio = $sumaaforos / $contador;
+$aforomedio = $sumaAforos / $contador;
 
 echo "Aforo medio de los eventos de Málaga: " .$aforomedio;
 
@@ -70,12 +70,16 @@ foreach ($AgendaTotal as $codigo => $valor) {
     $evento=explode(", ", $valor);
         $aforo=explode(": ", $evento[1]);
     if ($aforo[1] > 45) {
-        echo $codigo. " => " .$valor. " [GRAN EVENTO]<br>";
+        $AgendaTotal[$codigo] = $valor. " [GRAN EVENTO]";
     } else if ($aforo[1] <= 45 AND $aforo[1] >= 10) {
-        echo $codigo. " => " .$valor. " [AFORO MEDIO]<br>";
+        $AgendaTotal[$codigo] = $valor. " [AFORO MEDIO]";
     } else if ($aforo[1] < 10) {
-        echo $codigo. " => " .$valor. " [AFORO REDUCIDO]<br>";
+        $AgendaTotal[$codigo] = $valor. " [AFORO REDUCIDO]";
     }
+}
+
+foreach ($AgendaTotal as $codigo => $valor) {
+    echo $codigo. " => " .$valor. "<br>";
 }
 
 echo "<br>";
