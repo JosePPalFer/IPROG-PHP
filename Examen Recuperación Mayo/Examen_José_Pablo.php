@@ -59,6 +59,8 @@ foreach ($AgendaTotal as $codigo => $valor) {
     }
 }
 
+echo "Tras la eliminación, quedan " .count($AgendaTotal). " eventos.<br><br>";
+
 foreach ($AgendaTotal as $codigo => $valor) {
     echo $codigo. " => " .$valor. "<br>";
 }
